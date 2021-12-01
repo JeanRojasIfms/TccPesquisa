@@ -9,9 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.edu.ifms.pesquisa.domain.Campus;
+import br.edu.ifms.pesquisa.domain.Funcao;
+import br.edu.ifms.pesquisa.domain.Membro;
 import br.edu.ifms.pesquisa.domain.Noticia;
 import br.edu.ifms.pesquisa.domain.Nucleo;
 import br.edu.ifms.pesquisa.repository.CampusRepository;
+import br.edu.ifms.pesquisa.repository.FuncaoRepository;
+import br.edu.ifms.pesquisa.repository.MembroRepository;
 import br.edu.ifms.pesquisa.repository.NoticiaRepository;
 import br.edu.ifms.pesquisa.repository.NucleoRepository;
 
@@ -22,7 +26,11 @@ public class PesquisaApplication implements CommandLineRunner{
 	@Autowired
 	private NucleoRepository nucleoRepository;
 	@Autowired
-	private NoticiaRepository noticiaRepository;
+	private NoticiaRepository noticiaRepository;	
+	@Autowired
+	private MembroRepository membroRepository;	
+	@Autowired
+	private FuncaoRepository funcaoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -56,6 +64,25 @@ public class PesquisaApplication implements CommandLineRunner{
 		
 		nucleoRepository.saveAll(Arrays.asList(nuc1,nuc2,nuc3));
 		noticiaRepository.saveAll(Arrays.asList(not1,not2,not3));
+		
+		Funcao func1 = new Funcao(null, "Coordenador");
+		Funcao func2 = new Funcao(null, "Pesquisador");
+		Funcao func3 = new Funcao(null, "Estudante");
+		
+		Membro mem1 = new Membro(null, "Jean Rojas", "caminho da foto de jean", "caminho do lattes de jean", "jean.rojas@ifms.edu.br", func1);
+		Membro mem2 = new Membro(null, "Rafael Françozo", "caminho da foto de Françozo", "caminho do lattes de Françozo", "rafael.francozo@ifms.edu.br", func1);
+		Membro mem3 = new Membro(null, "Karine Tereza", "caminho da foto de Karine", "caminho do lattes de karine", "karineterezadepaula8@gmail.com", func3);
+		Membro mem4 = new Membro(null, "Gabrielli Carmo vargas", "caminho da foto de Gabrielli", "caminho do lattes de gabrielli", "gabriellicarmovargasgabi@gmail.com", func3);
+		Membro mem5 = new Membro(null, "Joao Motta", "caminho da foto de Joao", "caminho do lattes de Joao", "joaomotta@gmail.com", func2);
+		Membro mem6 = new Membro(null, "Maria Silva", "caminho da foto de maria", "caminho do lattes de Maria", "mariasilva@gmail.com", func2);
+		
+		func1.getMembros().addAll(Arrays.asList(mem1,mem2));
+		func2.getMembros().addAll(Arrays.asList(mem5,mem6));
+		func3.getMembros().addAll(Arrays.asList(mem3,mem4));
+		
+		funcaoRepository.saveAll(Arrays.asList(func1,func2,func3));
+		membroRepository.saveAll(Arrays.asList(mem1,mem2,mem3,mem4,mem5,mem6));
+		
 		
 	}
 

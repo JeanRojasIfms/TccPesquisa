@@ -1,8 +1,6 @@
 package br.edu.ifms.pesquisa.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,50 +8,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
-public class Nucleo implements Serializable{
+public class Membro implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String pathBanner;
-	private String descricao;
+	private String pathFoto;
+	private String pathLattes;
+	private String email;
+	
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="campus_id")
-	private Campus campus;
+	@JoinColumn(name="funcao_id")	
+	private Funcao funcao;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "nucleo")
-	private List<Noticia> noticias = new ArrayList<Noticia>();
-	
-	
-	public Nucleo() {
+	public Membro() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Nucleo(Integer id, String nome, String pathBanner, String descricao, Campus campus) {
+	public Membro(Integer id, String nome, String pathFoto, String pathLattes, String email, Funcao funcao) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.pathBanner = pathBanner;
-		this.descricao = descricao;
-		this.campus = campus;
-	}
-	
-	public List<Noticia> getNoticias() {
-		return noticias;
-	}
-
-	public void setNoticias(List<Noticia> noticias) {
-		this.noticias = noticias;
+		this.pathFoto = pathFoto;
+		this.pathLattes = pathLattes;
+		this.email = email;
+		this.funcao = funcao;
 	}
 
 	public Integer getId() {
@@ -72,28 +57,36 @@ public class Nucleo implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getPathBanner() {
-		return pathBanner;
+	public String getPathFoto() {
+		return pathFoto;
 	}
 
-	public void setPathBanner(String pathBanner) {
-		this.pathBanner = pathBanner;
+	public void setPathFoto(String pathFoto) {
+		this.pathFoto = pathFoto;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getPathLattes() {
+		return pathLattes;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setPathLattes(String pathLattes) {
+		this.pathLattes = pathLattes;
 	}
 
-	public Campus getCampus() {
-		return campus;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCampus(Campus campus) {
-		this.campus = campus;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Funcao getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
 	}
 
 	@Override
@@ -112,17 +105,13 @@ public class Nucleo implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Nucleo other = (Nucleo) obj;
+		Membro other = (Membro) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	
-	
-	
-	
+	}	
 
 }
