@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -38,6 +40,14 @@ public class Nucleo implements Serializable{
 	@OneToMany(mappedBy = "nucleo")
 	private List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
 	
+	@JsonManagedReference
+	@ManyToMany
+	@JoinTable(
+			name="NUCLEO_MEMBRO",
+			joinColumns = @JoinColumn(name="nucleo_id"),
+			inverseJoinColumns = @JoinColumn(name="membro_id"))
+	private List<Membro> membros = new ArrayList<Membro>();
+	
 	public Nucleo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -52,6 +62,15 @@ public class Nucleo implements Serializable{
 	}
 	
 	
+	
+	public List<Membro> getMembros() {
+		return membros;
+	}
+
+	public void setMembros(List<Membro> membros) {
+		this.membros = membros;
+	}
+
 	public List<Pesquisa> getPesquisas() {
 		return pesquisas;
 	}

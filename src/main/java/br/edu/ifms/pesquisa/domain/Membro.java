@@ -1,15 +1,19 @@
 package br.edu.ifms.pesquisa.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Membro implements Serializable{
 
@@ -22,10 +26,14 @@ public class Membro implements Serializable{
 	private String pathLattes;
 	private String email;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="funcao_id")	
 	private Funcao funcao;
+	
+	@JsonBackReference
+	@ManyToMany(mappedBy = "membros")
+	private List<Nucleo> nucleos = new ArrayList<Nucleo>();
 	
 	public Membro() {
 		// TODO Auto-generated constructor stub
@@ -39,6 +47,15 @@ public class Membro implements Serializable{
 		this.pathLattes = pathLattes;
 		this.email = email;
 		this.funcao = funcao;
+	}
+
+	
+	public List<Nucleo> getNucleos() {
+		return nucleos;
+	}
+
+	public void setNucleos(List<Nucleo> nucleos) {
+		this.nucleos = nucleos;
 	}
 
 	public Integer getId() {

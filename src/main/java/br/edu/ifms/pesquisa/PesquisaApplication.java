@@ -101,16 +101,7 @@ public class PesquisaApplication implements CommandLineRunner{
 		nuc1.getPesquisas().addAll(Arrays.asList(pes1,pes2,pes5,pes6));
 		nuc2.getPesquisas().addAll(Arrays.asList(pes3,pes4));
 		
-		nucleoRepository.saveAll(Arrays.asList(nuc1,nuc2,nuc3));
-		
-		discenteRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6));
-		pesquisaRepository.saveAll(Arrays.asList(pes1,pes2,pes3,pes4,pes5,pes6));
-		
-		//--------------------------
-		
-		
-		noticiaRepository.saveAll(Arrays.asList(not1,not2,not3));
-		
+		// ***************************************
 		Funcao func1 = new Funcao(null, "Coordenador");
 		Funcao func2 = new Funcao(null, "Pesquisador");
 		Funcao func3 = new Funcao(null, "Estudante");
@@ -126,11 +117,32 @@ public class PesquisaApplication implements CommandLineRunner{
 		func2.getMembros().addAll(Arrays.asList(mem5,mem6));
 		func3.getMembros().addAll(Arrays.asList(mem3,mem4));
 		
+		mem1.getNucleos().addAll(Arrays.asList(nuc1, nuc2));
+		mem2.getNucleos().addAll(Arrays.asList(nuc2));
+		mem3.getNucleos().addAll(Arrays.asList(nuc1));
+		mem4.getNucleos().addAll(Arrays.asList(nuc1));
+		mem5.getNucleos().addAll(Arrays.asList(nuc3));
+		mem6.getNucleos().addAll(Arrays.asList(nuc3));
+		
+		nuc1.getMembros().addAll(Arrays.asList(mem1,mem3,mem4));
+		nuc2.getMembros().addAll(Arrays.asList(mem1,mem2));
+		nuc3.getMembros().addAll(Arrays.asList(mem5,mem6));
+		
 		funcaoRepository.saveAll(Arrays.asList(func1,func2,func3));
 		membroRepository.saveAll(Arrays.asList(mem1,mem2,mem3,mem4,mem5,mem6));
+		// ***************************************
 		
-
+		nucleoRepository.saveAll(Arrays.asList(nuc1,nuc2,nuc3));
 		
+		discenteRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6));
+		pesquisaRepository.saveAll(Arrays.asList(pes1,pes2,pes3,pes4,pes5,pes6));
+		
+		//--------------------------
+		
+		
+		noticiaRepository.saveAll(Arrays.asList(not1,not2,not3));
+		
+				
 		
 		
 	}
