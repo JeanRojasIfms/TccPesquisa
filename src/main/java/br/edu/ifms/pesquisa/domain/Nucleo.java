@@ -1,6 +1,8 @@
 package br.edu.ifms.pesquisa.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -26,6 +29,10 @@ public class Nucleo implements Serializable{
 	@JoinColumn(name="campus_id")
 	private Campus campus;
 	
+	@OneToMany(mappedBy = "nucleo")
+	private List<Noticia> noticias = new ArrayList<Noticia>();
+	
+	
 	public Nucleo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -37,6 +44,14 @@ public class Nucleo implements Serializable{
 		this.pathBanner = pathBanner;
 		this.descricao = descricao;
 		this.campus = campus;
+	}
+	
+	public List<Noticia> getNoticias() {
+		return noticias;
+	}
+
+	public void setNoticias(List<Noticia> noticias) {
+		this.noticias = noticias;
 	}
 
 	public Integer getId() {
