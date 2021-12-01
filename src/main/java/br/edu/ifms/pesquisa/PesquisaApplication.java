@@ -9,15 +9,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.edu.ifms.pesquisa.domain.Campus;
+import br.edu.ifms.pesquisa.domain.Discente;
 import br.edu.ifms.pesquisa.domain.Funcao;
 import br.edu.ifms.pesquisa.domain.Membro;
 import br.edu.ifms.pesquisa.domain.Noticia;
 import br.edu.ifms.pesquisa.domain.Nucleo;
+import br.edu.ifms.pesquisa.domain.Pesquisa;
 import br.edu.ifms.pesquisa.repository.CampusRepository;
+import br.edu.ifms.pesquisa.repository.DiscenteRepository;
 import br.edu.ifms.pesquisa.repository.FuncaoRepository;
 import br.edu.ifms.pesquisa.repository.MembroRepository;
 import br.edu.ifms.pesquisa.repository.NoticiaRepository;
 import br.edu.ifms.pesquisa.repository.NucleoRepository;
+import br.edu.ifms.pesquisa.repository.PesquisaRepository;
 
 @SpringBootApplication
 public class PesquisaApplication implements CommandLineRunner{
@@ -31,6 +35,10 @@ public class PesquisaApplication implements CommandLineRunner{
 	private MembroRepository membroRepository;	
 	@Autowired
 	private FuncaoRepository funcaoRepository;
+	@Autowired
+	private DiscenteRepository discenteRepository;
+	@Autowired
+	private PesquisaRepository pesquisaRepository;
 	
 	
 	public static void main(String[] args) {
@@ -82,6 +90,37 @@ public class PesquisaApplication implements CommandLineRunner{
 		
 		funcaoRepository.saveAll(Arrays.asList(func1,func2,func3));
 		membroRepository.saveAll(Arrays.asList(mem1,mem2,mem3,mem4,mem5,mem6));
+		
+		Pesquisa pes1 = new Pesquisa(null, "Frameworks Java");
+		Pesquisa pes2 = new Pesquisa(null, "Java Server Faces");
+		Pesquisa pes3 = new Pesquisa(null, "Laravel Framework");
+		Pesquisa pes4 = new Pesquisa(null, "Cake Framework");
+		Pesquisa pes5 = new Pesquisa(null, "JPA");
+		Pesquisa pes6 = new Pesquisa(null, "Hibernate");
+		
+		Discente d1 = new Discente(null, 1111, "Luan Pereira", "luan.pereira@ifms.edu.br","67 991294092");
+		Discente d2 = new Discente(null, 2222, "Joana Dark", "joana.dark@ifms.edu.br","67 991294565");
+		Discente d3 = new Discente(null, 3333, "Arthur Silva", "arthur.silva@ifms.edu.br","67 991293456");
+		Discente d4 = new Discente(null, 4444, "Mariana Juliao", "mariana.juliao@ifms.edu.br","67 991292346");
+		Discente d5 = new Discente(null, 5555, "Pedro Gustta", "pedro.gustta@ifms.edu.br","67 991299475");
+		Discente d6 = new Discente(null, 6666, "Tobias Martinaci", "tobias.martinaci@ifms.edu.br","67 991290947");
+		
+		pes1.getDiscentes().addAll(Arrays.asList(d1,d2));
+		pes2.getDiscentes().addAll(Arrays.asList(d1,d2,d3));
+		pes3.getDiscentes().addAll(Arrays.asList(d4,d6));
+		pes4.getDiscentes().addAll(Arrays.asList(d5,d6));
+		pes5.getDiscentes().addAll(Arrays.asList(d6));
+		pes6.getDiscentes().addAll(Arrays.asList(d1,d6));
+		
+		d1.getPesquisas().addAll(Arrays.asList(pes1,pes2,pes6));
+		d2.getPesquisas().addAll(Arrays.asList(pes1,pes2));
+		d3.getPesquisas().addAll(Arrays.asList(pes3));
+		d4.getPesquisas().addAll(Arrays.asList(pes3));
+		d5.getPesquisas().addAll(Arrays.asList(pes4));
+		d6.getPesquisas().addAll(Arrays.asList(pes3,pes4,pes5,pes6));
+		
+		discenteRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6));
+		pesquisaRepository.saveAll(Arrays.asList(pes1,pes2,pes3,pes4,pes5,pes6));
 		
 		
 	}

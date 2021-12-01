@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifms.pesquisa.domain.Membro;
-import br.edu.ifms.pesquisa.service.MembroService;
+import br.edu.ifms.pesquisa.domain.Discente;
+import br.edu.ifms.pesquisa.service.DiscenteService;
 
 
 @RestController
-@RequestMapping(value = "/membro")
-public class MembroResource {
+@RequestMapping(value = "/discente")
+public class DiscenteResource {
 	
 	@Autowired
-	private MembroService membro;
+	private DiscenteService discente;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		Membro obj = membro.buscar(id);
+		Discente obj = discente.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

@@ -5,17 +5,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifms.pesquisa.domain.Discente;
 import br.edu.ifms.pesquisa.domain.Membro;
-import br.edu.ifms.pesquisa.repository.MembroRepository;
+import br.edu.ifms.pesquisa.repository.DiscenteRepository;
 import br.edu.ifms.pesquisa.service.exception.ObjectNotFoundException;
 
 @Service
-public class MembroService {
+public class DiscenteService {
 	@Autowired
-	private MembroRepository repo;
+	private DiscenteRepository repo;
 	
-	public Membro buscar(Integer id) {
-		Optional<Membro> obj = repo.findById(id); 
+	public Discente buscar(Integer id) {
+		Optional<Discente> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Membro.class.getName()));		
 	}
