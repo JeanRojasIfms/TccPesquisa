@@ -58,8 +58,7 @@ public class PesquisaApplication implements CommandLineRunner{
 		cam1.getNucleos().addAll(Arrays.asList(nuc1,nuc2));
 		cam2.getNucleos().addAll(Arrays.asList(nuc3));
 		
-		campusRepository.saveAll(Arrays.asList(cam1,cam2));
-		//nucleoRepository.saveAll(Arrays.asList(nuc1,nuc2,nuc3));
+		campusRepository.saveAll(Arrays.asList(cam1,cam2));		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
@@ -70,33 +69,13 @@ public class PesquisaApplication implements CommandLineRunner{
 		nuc1.getNoticias().addAll(Arrays.asList(not1,not2));
 		nuc2.getNoticias().addAll(Arrays.asList(not3));
 		
-		nucleoRepository.saveAll(Arrays.asList(nuc1,nuc2,nuc3));
-		noticiaRepository.saveAll(Arrays.asList(not1,not2,not3));
-		
-		Funcao func1 = new Funcao(null, "Coordenador");
-		Funcao func2 = new Funcao(null, "Pesquisador");
-		Funcao func3 = new Funcao(null, "Estudante");
-		
-		Membro mem1 = new Membro(null, "Jean Rojas", "caminho da foto de jean", "caminho do lattes de jean", "jean.rojas@ifms.edu.br", func1);
-		Membro mem2 = new Membro(null, "Rafael Françozo", "caminho da foto de Françozo", "caminho do lattes de Françozo", "rafael.francozo@ifms.edu.br", func1);
-		Membro mem3 = new Membro(null, "Karine Tereza", "caminho da foto de Karine", "caminho do lattes de karine", "karineterezadepaula8@gmail.com", func3);
-		Membro mem4 = new Membro(null, "Gabrielli Carmo vargas", "caminho da foto de Gabrielli", "caminho do lattes de gabrielli", "gabriellicarmovargasgabi@gmail.com", func3);
-		Membro mem5 = new Membro(null, "Joao Motta", "caminho da foto de Joao", "caminho do lattes de Joao", "joaomotta@gmail.com", func2);
-		Membro mem6 = new Membro(null, "Maria Silva", "caminho da foto de maria", "caminho do lattes de Maria", "mariasilva@gmail.com", func2);
-		
-		func1.getMembros().addAll(Arrays.asList(mem1,mem2));
-		func2.getMembros().addAll(Arrays.asList(mem5,mem6));
-		func3.getMembros().addAll(Arrays.asList(mem3,mem4));
-		
-		funcaoRepository.saveAll(Arrays.asList(func1,func2,func3));
-		membroRepository.saveAll(Arrays.asList(mem1,mem2,mem3,mem4,mem5,mem6));
-		
-		Pesquisa pes1 = new Pesquisa(null, "Frameworks Java");
-		Pesquisa pes2 = new Pesquisa(null, "Java Server Faces");
-		Pesquisa pes3 = new Pesquisa(null, "Laravel Framework");
-		Pesquisa pes4 = new Pesquisa(null, "Cake Framework");
-		Pesquisa pes5 = new Pesquisa(null, "JPA");
-		Pesquisa pes6 = new Pesquisa(null, "Hibernate");
+		//--------------------------
+		Pesquisa pes1 = new Pesquisa(null, "Frameworks Java", nuc1);
+		Pesquisa pes2 = new Pesquisa(null, "Java Server Faces", nuc1);
+		Pesquisa pes3 = new Pesquisa(null, "Laravel Framework",nuc2);
+		Pesquisa pes4 = new Pesquisa(null, "Cake Framework",nuc2);
+		Pesquisa pes5 = new Pesquisa(null, "JPA",nuc1);
+		Pesquisa pes6 = new Pesquisa(null, "Hibernate",nuc1);
 		
 		Discente d1 = new Discente(null, 1111, "Luan Pereira", "luan.pereira@ifms.edu.br","67 991294092");
 		Discente d2 = new Discente(null, 2222, "Joana Dark", "joana.dark@ifms.edu.br","67 991294565");
@@ -119,8 +98,39 @@ public class PesquisaApplication implements CommandLineRunner{
 		d5.getPesquisas().addAll(Arrays.asList(pes4));
 		d6.getPesquisas().addAll(Arrays.asList(pes3,pes4,pes5,pes6));
 		
+		nuc1.getPesquisas().addAll(Arrays.asList(pes1,pes2,pes5,pes6));
+		nuc2.getPesquisas().addAll(Arrays.asList(pes3,pes4));
+		
+		nucleoRepository.saveAll(Arrays.asList(nuc1,nuc2,nuc3));
+		
 		discenteRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6));
 		pesquisaRepository.saveAll(Arrays.asList(pes1,pes2,pes3,pes4,pes5,pes6));
+		
+		//--------------------------
+		
+		
+		noticiaRepository.saveAll(Arrays.asList(not1,not2,not3));
+		
+		Funcao func1 = new Funcao(null, "Coordenador");
+		Funcao func2 = new Funcao(null, "Pesquisador");
+		Funcao func3 = new Funcao(null, "Estudante");
+		
+		Membro mem1 = new Membro(null, "Jean Rojas", "caminho da foto de jean", "caminho do lattes de jean", "jean.rojas@ifms.edu.br", func1);
+		Membro mem2 = new Membro(null, "Rafael Françozo", "caminho da foto de Françozo", "caminho do lattes de Françozo", "rafael.francozo@ifms.edu.br", func1);
+		Membro mem3 = new Membro(null, "Karine Tereza", "caminho da foto de Karine", "caminho do lattes de karine", "karineterezadepaula8@gmail.com", func3);
+		Membro mem4 = new Membro(null, "Gabrielli Carmo vargas", "caminho da foto de Gabrielli", "caminho do lattes de gabrielli", "gabriellicarmovargasgabi@gmail.com", func3);
+		Membro mem5 = new Membro(null, "Joao Motta", "caminho da foto de Joao", "caminho do lattes de Joao", "joaomotta@gmail.com", func2);
+		Membro mem6 = new Membro(null, "Maria Silva", "caminho da foto de maria", "caminho do lattes de Maria", "mariasilva@gmail.com", func2);
+		
+		func1.getMembros().addAll(Arrays.asList(mem1,mem2));
+		func2.getMembros().addAll(Arrays.asList(mem5,mem6));
+		func3.getMembros().addAll(Arrays.asList(mem3,mem4));
+		
+		funcaoRepository.saveAll(Arrays.asList(func1,func2,func3));
+		membroRepository.saveAll(Arrays.asList(mem1,mem2,mem3,mem4,mem5,mem6));
+		
+
+		
 		
 		
 	}

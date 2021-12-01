@@ -34,6 +34,9 @@ public class Nucleo implements Serializable{
 	@OneToMany(mappedBy = "nucleo")
 	private List<Noticia> noticias = new ArrayList<Noticia>();
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "nucleo")
+	private List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
 	
 	public Nucleo() {
 		// TODO Auto-generated constructor stub
@@ -48,6 +51,15 @@ public class Nucleo implements Serializable{
 		this.campus = campus;
 	}
 	
+	
+	public List<Pesquisa> getPesquisas() {
+		return pesquisas;
+	}
+
+	public void setPesquisas(List<Pesquisa> pesquisas) {
+		this.pesquisas = pesquisas;
+	}
+
 	public List<Noticia> getNoticias() {
 		return noticias;
 	}

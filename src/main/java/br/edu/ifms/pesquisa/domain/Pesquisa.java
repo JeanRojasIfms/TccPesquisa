@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pesquisa implements Serializable{
@@ -22,13 +24,19 @@ public class Pesquisa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	@JsonBackReference
+	
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(
 			name="PESQUISA_DISCENTE",
 			joinColumns = @JoinColumn(name="pesquisa_id"),
 			inverseJoinColumns = @JoinColumn(name="discente_id"))
 	private List<Discente> discentes = new ArrayList<Discente>();
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="nucleo_id")
+	private Nucleo nucleo;
 	
 	public Pesquisa() {
 		// TODO Auto-generated constructor stub
@@ -38,6 +46,21 @@ public class Pesquisa implements Serializable{
 		super();
 		this.id = id;
 		this.descricao = descricao;
+	}
+	
+	public Pesquisa(Integer id, String descricao, Nucleo nucleo) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.nucleo = nucleo;
+	}
+
+	public Nucleo getNucleo() {
+		return nucleo;
+	}
+
+	public void setNucleo(Nucleo nucleo) {
+		this.nucleo = nucleo;
 	}
 
 	public Integer getId() {
