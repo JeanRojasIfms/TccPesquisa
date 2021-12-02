@@ -12,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Membro implements Serializable{
 
@@ -26,12 +25,12 @@ public class Membro implements Serializable{
 	private String pathLattes;
 	private String email;
 	
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name="funcao_id")	
 	private Funcao funcao;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy = "membros")
 	private List<Nucleo> nucleos = new ArrayList<Nucleo>();
 	

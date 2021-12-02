@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Discente implements Serializable{
@@ -24,7 +24,7 @@ public class Discente implements Serializable{
 	private String email;
 	private String telefone;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy = "discentes")
 	List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
 

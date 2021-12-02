@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Campus implements Serializable{
 
@@ -23,7 +21,7 @@ public class Campus implements Serializable{
 	private String nome;
 	private String pathBanner;
 	private String pathLogo;
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "campus")	
 	private List<Nucleo> nucleos = new ArrayList<>();
 	

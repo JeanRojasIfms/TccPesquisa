@@ -13,8 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pesquisa implements Serializable{
@@ -24,8 +23,7 @@ public class Pesquisa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	
-	@JsonManagedReference
+		
 	@ManyToMany
 	@JoinTable(
 			name="PESQUISA_DISCENTE",
@@ -33,7 +31,7 @@ public class Pesquisa implements Serializable{
 			inverseJoinColumns = @JoinColumn(name="discente_id"))
 	private List<Discente> discentes = new ArrayList<Discente>();
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="nucleo_id")
 	private Nucleo nucleo;

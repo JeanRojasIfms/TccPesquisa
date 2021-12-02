@@ -14,8 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Nucleo implements Serializable{
@@ -27,20 +26,18 @@ public class Nucleo implements Serializable{
 	private String nome;
 	private String pathBanner;
 	private String descricao;
-	@JsonBackReference
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="campus_id")
 	private Campus campus;
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy = "nucleo")
 	private List<Noticia> noticias = new ArrayList<Noticia>();
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy = "nucleo")
 	private List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
 	
-	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(
 			name="NUCLEO_MEMBRO",
