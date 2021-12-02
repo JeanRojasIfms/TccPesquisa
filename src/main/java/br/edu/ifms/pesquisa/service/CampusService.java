@@ -19,4 +19,10 @@ public class CampusService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Campus.class.getName()));		
 	}
+	
+	public Campus insert (Campus obj) {
+		obj .setId(null);
+		return repo.save(obj);
+		
+	}
 }
