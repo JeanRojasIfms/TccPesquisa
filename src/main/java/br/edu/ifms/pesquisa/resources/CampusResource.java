@@ -33,12 +33,16 @@ public class CampusResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	@RequestMapping(value = "/{id}", method= RequestMethod.PUT)
+	@RequestMapping(value="/{id}", method= RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Campus obj,@PathVariable Integer id){
 		obj.setId(id);
 		obj = campus.updade(obj);
+		return ResponseEntity.noContent().build();		
+	}
+	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@RequestBody Campus obj,@PathVariable Integer id){
+		campus.delete(id);
 		return ResponseEntity.noContent().build();
-		
 	}
 
 }
