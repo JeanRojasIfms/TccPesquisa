@@ -1,6 +1,8 @@
 package br.edu.ifms.pesquisa.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.edu.ifms.pesquisa.domain.Campus;
+import br.edu.ifms.pesquisa.dto.CampusDTO;
 import br.edu.ifms.pesquisa.service.CampusService;
 
 
@@ -43,6 +46,13 @@ public class CampusResource {
 	public ResponseEntity<Void> delete(@RequestBody Campus obj,@PathVariable Integer id){
 		campus.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CampusDTO>> findAll() {		
+		List<Campus> list = campus.findAll();
+		List<CampusDTO> listDto = list.stream().map(obj -> new CampusDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 
 }

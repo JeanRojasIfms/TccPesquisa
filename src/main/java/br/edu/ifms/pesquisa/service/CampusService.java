@@ -1,5 +1,6 @@
 package br.edu.ifms.pesquisa.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,11 @@ public class CampusService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível remover. Verifique a integridade referencial.");
 		}
+	}
+
+	public List<Campus> findAll() {
+		// TODO Auto-generated method stub
+		
+		return repo.findAll();
 	}
 }
