@@ -19,9 +19,9 @@ public class DiscenteResource {
 	private DiscenteService discente;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Discente> find(@PathVariable Integer id) {
 		
-		Discente obj = discente.buscar(id);
+		Discente obj = discente.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

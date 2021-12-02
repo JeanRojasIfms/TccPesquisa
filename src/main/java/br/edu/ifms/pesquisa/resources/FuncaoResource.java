@@ -19,9 +19,9 @@ public class FuncaoResource {
 	private FuncaoService funcao;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Funcao> find(@PathVariable Integer id) {
 		
-		Funcao obj = funcao.buscar(id);
+		Funcao obj = funcao.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

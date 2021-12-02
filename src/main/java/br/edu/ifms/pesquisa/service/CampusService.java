@@ -14,15 +14,21 @@ public class CampusService {
 	@Autowired
 	private CampusRepository repo;
 	
-	public Campus buscar(Integer id) {
+	public Campus find(Integer id) {
 		Optional<Campus> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Campus.class.getName()));		
 	}
 	
 	public Campus insert (Campus obj) {
-		obj .setId(null);
+		obj.setId(null);
 		return repo.save(obj);
 		
+	}
+
+	public Campus updade(Campus obj) {
+		// TODO Auto-generated method stub
+		find(obj.getId());
+		return repo.save(obj);
 	}
 }

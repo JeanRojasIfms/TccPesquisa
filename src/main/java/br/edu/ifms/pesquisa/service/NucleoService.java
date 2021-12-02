@@ -15,7 +15,7 @@ public class NucleoService {
 	@Autowired
 	private NucleoRepository repo;
 	
-	public Nucleo buscar(Integer id) {
+	public Nucleo find(Integer id) {
 		Optional<Nucleo> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Campus.class.getName()));		

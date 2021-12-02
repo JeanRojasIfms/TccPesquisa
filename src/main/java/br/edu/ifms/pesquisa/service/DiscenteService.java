@@ -15,7 +15,7 @@ public class DiscenteService {
 	@Autowired
 	private DiscenteRepository repo;
 	
-	public Discente buscar(Integer id) {
+	public Discente find(Integer id) {
 		Optional<Discente> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Membro.class.getName()));		

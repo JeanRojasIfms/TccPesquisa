@@ -15,7 +15,7 @@ public class FuncaoService {
 	@Autowired
 	private FuncaoRepository repo;
 	
-	public Funcao buscar(Integer id) {
+	public Funcao find(Integer id) {
 		Optional<Funcao> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Membro.class.getName()));		

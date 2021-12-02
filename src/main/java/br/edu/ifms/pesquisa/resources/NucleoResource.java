@@ -19,9 +19,9 @@ public class NucleoResource {
 	private NucleoService nucleo;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Nucleo> find(@PathVariable Integer id) {
 		
-		Nucleo obj = nucleo.buscar(id);
+		Nucleo obj = nucleo.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

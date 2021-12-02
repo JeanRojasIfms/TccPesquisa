@@ -23,9 +23,8 @@ public class CampusResource {
 	private CampusService campus;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		
-		Campus obj = campus.buscar(id);
+	public ResponseEntity<Campus> find(@PathVariable Integer id) {		
+		Campus obj = campus.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	@RequestMapping(method = RequestMethod.POST)
@@ -33,6 +32,13 @@ public class CampusResource {
 		obj = campus.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	@RequestMapping(value = "/{id}", method= RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Campus obj,@PathVariable Integer id){
+		obj.setId(id);
+		obj = campus.updade(obj);
+		return ResponseEntity.noContent().build();
+		
 	}
 
 }
