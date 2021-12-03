@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -32,18 +34,25 @@ public class CampusResource {
 		Campus obj = campus.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Campus obj){
+		
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody CampusDTO objDto) {
+		Campus obj = campus.fromDTO(objDto);
 		obj = campus.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+			.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	@RequestMapping(value="/{id}", method= RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Campus obj,@PathVariable Integer id){
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody CampusDTO objDto, @PathVariable Integer id) {
+		Campus obj = campus.fromDTO(objDto);
 		obj.setId(id);
-		obj = campus.updade(obj);
-		return ResponseEntity.noContent().build();		
+		obj = campus.update(obj);
+		return ResponseEntity.noContent().build();
 	}
+	
+	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@RequestBody Campus obj,@PathVariable Integer id){
 		campus.delete(id);

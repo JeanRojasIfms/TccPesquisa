@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifms.pesquisa.domain.Campus;
+import br.edu.ifms.pesquisa.dto.CampusDTO;
 import br.edu.ifms.pesquisa.repository.CampusRepository;
 import br.edu.ifms.pesquisa.service.exception.DataIntegrityException;
 import br.edu.ifms.pesquisa.service.exception.ObjectNotFoundException;
@@ -32,10 +33,10 @@ public class CampusService {
 		
 	}
 
-	public Campus updade(Campus obj) {
-		// TODO Auto-generated method stub
-		find(obj.getId());
-		return repo.save(obj);
+	public Campus update(Campus obj) {
+		Campus newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -57,5 +58,15 @@ public class CampusService {
 	public Page<Campus> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Campus fromDTO(CampusDTO objDto) {
+		return new Campus(objDto.getId(), objDto.getNome(),objDto.getPathBanner(),objDto.getPathLogo());
+	}
+	
+	private void updateData(Campus newObj, Campus obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setPathBanner(obj.getPathBanner());
+		newObj.setPathLogo(obj.getPathLogo());
 	}
 }
