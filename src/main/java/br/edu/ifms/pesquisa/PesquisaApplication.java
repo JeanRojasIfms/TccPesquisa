@@ -51,6 +51,14 @@ public class PesquisaApplication implements CommandLineRunner{
 		Campus cam1 = new Campus(null, "IFMS","caminho do banner IFMS","caminho do logo do IFMS");
 		Campus cam2 = new Campus(null, "UFMS","caminho banner UFMS","caminho do logo do UFMS");
 		Campus cam3 = new Campus(null, "USP","caminho banner USP","caminho do logo do USP");
+		Campus cam4 = new Campus(null, "Unicamp","caminho banner unicamp","caminho do logo do unicamp");
+		Campus cam5 = new Campus(null, "UFPR","caminho banner Ufpr","caminho do logo do Ufpr");
+		Campus cam6 = new Campus(null, "IFBA","caminho banner ifba","caminho do logo do ifba");
+		Campus cam7 = new Campus(null, "IFPR","caminho banner ifpr","caminho do logo do ifpr");
+		Campus cam8 = new Campus(null, "UFRGS","caminho banner ufrgs","caminho do logo do ufrgs");
+		Campus cam9 = new Campus(null, "UFMG","caminho banner ufmg","caminho do logo do ufmg");
+		Campus cam10 = new Campus(null, "Uniderp","caminho banner Uniderp","caminho do logo do Uniderp");
+		
 		
 		
 		Nucleo nuc1 = new Nucleo(null,"Nucleo Java", "banner do nucleo java", "pesquisas e tcc em java", cam1);
@@ -60,7 +68,7 @@ public class PesquisaApplication implements CommandLineRunner{
 		cam1.getNucleos().addAll(Arrays.asList(nuc1,nuc2));
 		cam2.getNucleos().addAll(Arrays.asList(nuc3));
 		
-		campusRepository.saveAll(Arrays.asList(cam1,cam2,cam3));		
+		campusRepository.saveAll(Arrays.asList(cam1,cam2,cam3,cam4,cam5,cam6,cam7,cam8,cam9,cam10));		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
