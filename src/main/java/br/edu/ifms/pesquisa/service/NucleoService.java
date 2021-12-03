@@ -1,13 +1,19 @@
 package br.edu.ifms.pesquisa.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifms.pesquisa.domain.Campus;
 import br.edu.ifms.pesquisa.domain.Nucleo;
+import br.edu.ifms.pesquisa.dto.NucleoDTO;
 import br.edu.ifms.pesquisa.repository.NucleoRepository;
+import br.edu.ifms.pesquisa.service.exception.DataIntegrityException;
 import br.edu.ifms.pesquisa.service.exception.ObjectNotFoundException;
 
 @Service
@@ -18,6 +24,43 @@ public class NucleoService {
 	public Nucleo find(Integer id) {
 		Optional<Nucleo> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
-				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Campus.class.getName()));		
+				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Nucleo.class.getName()));		
+	}
+	
+	public Nucleo update(Nucleo obj) {
+		Nucleo newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		find(id);
+		try {
+			repo.deleteById(id);	
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível remover. Verifique a integridade referencial.");
+		}
+	}
+
+	public List<Nucleo> findAll() {
+		// TODO Auto-generated method stub		
+		return repo.findAll();
+	}
+	
+	public Page<Nucleo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
+	}
+	
+	public Nucleo fromDTO(NucleoDTO objDto) {
+		return new Nucleo(objDto.getId(), objDto.getNome(),objDto.getPathBanner(),objDto.getDescricao(),null);
+	}
+	
+	private void updateData(Nucleo newObj, Nucleo obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setPathBanner(obj.getPathBanner());
+		newObj.setDescricao(obj.getDescricao());
 	}
 }
