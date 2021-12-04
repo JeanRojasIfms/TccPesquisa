@@ -72,9 +72,12 @@ public class PesquisaApplication implements CommandLineRunner{
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		Noticia not1 = new Noticia(null, "Titulo da noticia 1", sdf.parse("01/12/2021 10:32"), "corpo da noticia 1 - Java", nuc1);
-		Noticia not2 = new Noticia(null, "Titulo da noticia 2", sdf.parse("01/12/2021 11:32"), "corpo da noticia 2 - java", nuc1);
-		Noticia not3 = new Noticia(null, "Titulo da noticia 3", sdf.parse("01/12/2021 12:32"), "corpo da noticia 3 - PHP", nuc2);
+		Noticia not1 = new Noticia(null, "Titulo da noticia 1", sdf.parse("01/12/2021 10:32"),
+				"corpo da noticia 1 - Java", nuc1);
+		Noticia not2 = new Noticia(null, "Titulo da noticia 2", sdf.parse("01/12/2021 11:32"), 
+				"corpo da noticia 2 - java", nuc1);
+		Noticia not3 = new Noticia(null, "Titulo da noticia 3", sdf.parse("01/12/2021 12:32"), 
+				"corpo da noticia 3 - PHP", nuc2);
 		
 		nuc1.getNoticias().addAll(Arrays.asList(not1,not2));
 		nuc2.getNoticias().addAll(Arrays.asList(not3));
@@ -103,7 +106,7 @@ public class PesquisaApplication implements CommandLineRunner{
 		
 		d1.getPesquisas().addAll(Arrays.asList(pes1,pes2,pes6));
 		d2.getPesquisas().addAll(Arrays.asList(pes1,pes2));
-		d3.getPesquisas().addAll(Arrays.asList(pes3));
+		d3.getPesquisas().addAll(Arrays.asList(pes2));
 		d4.getPesquisas().addAll(Arrays.asList(pes3));
 		d5.getPesquisas().addAll(Arrays.asList(pes4));
 		d6.getPesquisas().addAll(Arrays.asList(pes3,pes4,pes5,pes6));
