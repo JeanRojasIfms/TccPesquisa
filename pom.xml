@@ -12,10 +12,11 @@
 	<groupId>br.edu.ifms</groupId>
 	<artifactId>Pesquisa</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>Pesquisa</name>
 	<description>Site de divulvagação de pesquisa IFMS</description>
-
+	<properties>
+		<java.version>11</java.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -56,12 +57,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 
 		<!-- Java bean validation API - Spec -->
 		<dependency>
 			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>			
+			<artifactId>validation-api</artifactId>
 		</dependency>
 
 		<dependency>
